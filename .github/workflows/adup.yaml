@@ -9,7 +9,5 @@ jobs:
       - name: echo hello
         run: echo 'hello'
       - uses: wip/action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: echo darkness
         run: echo 'darkness'
