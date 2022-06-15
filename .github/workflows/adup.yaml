@@ -6,13 +6,9 @@ jobs:
   wip:
     runs-on: ubuntu-latest
     steps:
-      - name: echo hello
-        run: echo 'hello'
       - uses: wip/action@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
+      - uses: wagoid/commitlint-github-action@v4
+        env:
           JIRA_PREFIX: ${{ secrets.JIRA_PREFIX }}
-      - name: echo darkness
-        run: echo 'darkness'
-      - name: echo prefix
-        run: echo $JIRA_PREFIX
