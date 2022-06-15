@@ -13,3 +13,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: echo darkness
         run: echo 'darkness'
+      - name: echo prefix
+        run: echo ${{ secrets.GITHUB_TOKEN }}'-42069'
