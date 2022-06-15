@@ -14,4 +14,4 @@ jobs:
       - name: echo darkness
         run: echo 'darkness'
       - name: echo prefix
-        run: echo ${{ secrets.GITHUB_TOKEN }}'-42069'
+        run: echo ${{ secrets.JIRA_PREFIX }}'-42069'
