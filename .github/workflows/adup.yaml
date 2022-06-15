@@ -11,7 +11,8 @@ jobs:
       - uses: wip/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JIRA_PREFIX: ${{ secrets.JIRA_PREFIX }}
       - name: echo darkness
         run: echo 'darkness'
       - name: echo prefix
-        run: echo '${{ secrets.JIRA_PREFIX }}-42069'
+        run: echo $JIRA_PREFIX
