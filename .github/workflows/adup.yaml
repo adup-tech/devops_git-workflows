@@ -10,5 +10,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
       - uses: wagoid/commitlint-github-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
         env:
           JIRA_PREFIX: ${{ secrets.JIRA_PREFIX }}
