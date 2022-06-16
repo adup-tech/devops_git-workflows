@@ -11,6 +11,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
       - name: echo pre branch guard
         run: echo "should start branch guard"
-      - uses: ./branch-guard
+      - uses: ./branch-guard.yml
       - name: echo post branch guard
         run: echo "branch guard should have done something"
