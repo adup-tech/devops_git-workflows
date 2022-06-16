@@ -9,5 +9,10 @@ jobs:
       - uses: wip/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  call-branch-guard:
-    uses: ./.github/workflows/branch-guard.yml
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v4
