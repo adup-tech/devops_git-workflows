@@ -9,11 +9,6 @@ jobs:
       - uses: wip/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
-      - uses: wagoid/commitlint-github-action@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          JIRA_PREFIX: ${{ secrets.JIRA_PREFIX }}
       - name: echo pre branch guard
         run: echo "should start branch guard"
       - uses: ./branch-guard
