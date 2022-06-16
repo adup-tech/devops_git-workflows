@@ -14,3 +14,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
           JIRA_PREFIX: ${{ secrets.JIRA_PREFIX }}
+      - name: echo pre branch guard
+        run: echo "should start branch guard"
+      - uses: ./branch-guard
+      - name: echo post branch guard
+        run: echo "branch guard should have done something"
