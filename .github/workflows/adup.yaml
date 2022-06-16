@@ -11,6 +11,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
       - name: echo pre branch guard
         run: echo "should start branch guard"
-      - uses: ./branch-guard
+      - uses: cirrus-actions/branch-guard@v1.2
+        with:
+          appsToCheck: WIP (action) # or any other App name (can be a comma separated list of names)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: echo post branch guard
         run: echo "branch guard should have done something"
