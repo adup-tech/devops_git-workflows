@@ -32,23 +32,10 @@ jobs:
         uses: cycjimmy/semantic-release-action@v3
         id: semantic
         with:
-          branches: |
-            [
-              '+([0-9])?(.{+([0-9]),x}).x',
-              'main',
-              {
-                name: 'beta',
-                prerelease: true
-              },
-              {
-                name: 'alpha',
-                prerelease: true
-              }
-            ]
+          semantic_version: 16
           extra_plugins: |
-            @semantic-release/commit-analyzer
-            @semantic-release/release-notes-generator
             @semantic-release/changelog
+            @semantic-release/git
           dry_run: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
