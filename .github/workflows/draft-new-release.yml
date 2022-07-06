@@ -46,9 +46,9 @@ jobs:
               }
             ]
           extra_plugins: |
-            @semantic-release/commit-analyzer@9
-            @semantic-release/release-notes-generator@6
-            @semantic-release/changelog@3
+            @semantic-release/commit-analyzer
+            @semantic-release/release-notes-generator
+            @semantic-release/changelog
             @semantic-release/github
           dry_run: true
         env:
