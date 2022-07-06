@@ -28,23 +28,40 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Conventional Changelog Action
-        uses: TriPSs/conventional-changelog-action@v3
-        id: conventional_changelog
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
+        id: semantic
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          preset: 'angular'
-          tag-prefix: ''
-          skip-on-empty: 'false'
-          skip-version-file: 'true'
-          skip-commit: 'true'
-          create-summary: 'true'
+          branches: |
+            [
+              '+([0-9])?(.{+([0-9]),x}).x',
+              'main',
+              {
+                name: 'beta',
+                prerelease: true
+              },
+              {
+                name: 'alpha',
+                prerelease: true
+              }
+            ]
+          extra_plugins: |
+            @semantic-release/commit-analyzer@9
+            @semantic-release/release-notes-generator@6
+            @semantic-release/changelog@3
+            @semantic-release/github
+          dry_run: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Update Changelog
-        uses: stefanzweifel/changelog-updater-action@v1
-        with:
-          release-notes: ${{steps.build_changelog.outputs.changelog}}
-          latest-version: ${{ steps.calver.outputs.release }}
+      - name: Do something when a new release published
+        if: steps.semantic.outputs.new_release_published == 'true'
+        run: |
+          echo ${{ steps.semantic.outputs.new_release_version }}
+          echo ${{ steps.semantic.outputs.new_release_major_version }}
+          echo ${{ steps.semantic.outputs.new_release_minor_version }}
+          echo ${{ steps.semantic.outputs.new_release_patch_version }}
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
