@@ -36,6 +36,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Conventional Changelog Action
+        uses: TriPSs/conventional-changelog-action@v3
+        id: conventional_changelog
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          preset: 'angular'
+          tag-prefix: ''
+          release-count: '10'
+          skip-on-empty: 'false'
+          skip-version-file: 'true'
+          skip-commit: 'true'
+
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
         with:
