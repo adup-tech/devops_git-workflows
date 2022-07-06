@@ -34,6 +34,7 @@ jobs:
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
         with:
+          release-notes: ${{ steps.calver.outputs.release }}
           latest-version: ${{ steps.calver.outputs.release }}
 
       - name: Create pull request
