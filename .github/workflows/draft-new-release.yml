@@ -6,6 +6,7 @@ on:
       version:
         description: 'The version you want to release.'
         required: false
+  branches: main
 
 jobs:
   draft-new-release:
@@ -16,9 +17,6 @@ jobs:
 
       #  update changelog
       # bump version in project files etc.
-
-      - name: Uncommitted change
-        run: date +%s > report.txt
 
       - name: Calver Release
         uses: StephaneBour/actions-calver@v1.4.4
@@ -31,10 +29,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Build Changelog"
+        uses: mikepenz/release-changelog-builder-action@{latest-release}
+        id: build_changelog
+        with:
+          commitMode: "true"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Update Changelog
         uses: stefanzweifel/changelog-updater-action@v1
         with:
-          release-notes: ${{ steps.calver.outputs.release }}
+          release-notes: ${{steps.build_changelog.outputs.changelog}}
           latest-version: ${{ steps.calver.outputs.release }}
 
       - name: Create pull request
