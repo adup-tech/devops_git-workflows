@@ -32,9 +32,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update Changelog
-          uses: stefanzweifel/changelog-updater-action@v1
-          with:
-            latest-version: ${{ steps.calver.outputs.release }}
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ steps.calver.outputs.release }}
 
       - name: Create pull request
         uses: peter-evans/create-pull-request@v4
