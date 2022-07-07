@@ -30,6 +30,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create release branch
+        run: git checkout -b release/${{ steps.semantic.outputs.new_release_version }}
+
       - name: Create pull request
         if: steps.semantic.outputs.new_release_published == 'true'
         uses: peter-evans/create-pull-request@v4
