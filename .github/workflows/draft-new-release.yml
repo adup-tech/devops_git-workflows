@@ -7,6 +7,10 @@ on:
         description: 'The version you want to release.'
         required: false
 
+concurrency:
+  group: draft-new-release-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   draft-new-release:
     name: "Draft a new release"
@@ -24,14 +28,14 @@ jobs:
           dry_run: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create pull request
         if: steps.semantic.outputs.new_release_published == 'true'
         uses: peter-evans/create-pull-request@v4
+        id: create-pull-request
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: create release ${{ steps.calver.outputs.release }}
+          commit-message: "chore(release): ${{ steps.semantic.outputs.new_release_version }}\n\n${{ steps.semantic.outputs.new_release_notes }}"
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
@@ -54,10 +58,17 @@ jobs:
             ${{ steps.semantic.outputs.new_release_notes }}
           labels: |
             release
-            automated pr
           assignees: ${{ github.actor }}
           reviewers: ${{ github.actor }}
           team-reviewers: |
             owners
             maintainers
           draft: false
+
+      - name: Enable Pull Request Automerge
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.create-pull-request.outputs.pull-request-number }}
+          merge-method: merge
