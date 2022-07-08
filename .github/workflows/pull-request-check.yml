@@ -14,6 +14,7 @@ jobs:
         uses: wagoid/commitlint-github-action@v5
         id: commitlint-github-action
         with:
+          configFile: commitlint.config.js
           failOnWarnings: true
           helpURL: https://adup-tech.atlassian.net/wiki/spaces/UA/pages/3509190661/Git+Commit+Message+Convention
         env:
