@@ -1,0 +1,10 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  call-workflow:
+    uses: adup-tech/devops_git-workflows/.github/workflows/pull-request-check.yml@main
