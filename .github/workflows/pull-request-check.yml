@@ -14,7 +14,7 @@ jobs:
         uses: wagoid/commitlint-github-action@v5
         id: commitlint-github-action
         with:
-          failOnWarnings: false
+          failOnWarnings: true
           helpURL: https://adup-tech.atlassian.net/wiki/spaces/UA/pages/3509190661/Git+Commit+Message+Convention
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -23,7 +23,8 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            ###### Commit linter errors/warnings:
+            @${{ github.event.pull_request.user.login }}
+            #### Commit linter errors/warnings:
 
             commit message: *${{ fromJSON(steps.commitlint-github-action.outputs.results)[0].message }}*
 
