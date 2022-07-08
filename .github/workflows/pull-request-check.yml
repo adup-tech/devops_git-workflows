@@ -23,13 +23,13 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            Commit linter results for:
-            ${{ fromJSON(steps.commitlint-github-action.outputs.results)[0].message }}
+            ###### Commit linter errors/warnings:
 
-            :no_entry:
-            > ${{ join(fromJSON(steps.commitlint-github-action.outputs.results)[0].errors, '<br>') }}
+            commit message: *${{ fromJSON(steps.commitlint-github-action.outputs.results)[0].message }}*
 
             :warning:
+            > ${{ join(fromJSON(steps.commitlint-github-action.outputs.results)[0].errors, '<br>') }}
+
             > ${{ join(fromJSON(steps.commitlint-github-action.outputs.results)[0].warnings, '<br>') }}
 
             Please fix it!
