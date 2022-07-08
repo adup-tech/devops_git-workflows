@@ -1,0 +1,27 @@
+name: Pull Request Check Workflow
+on:
+  workflow_call:
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Commitlint
+        uses: wagoid/commitlint-github-action@v5
+        id: commitlint-github-action
+        with:
+          failOnWarnings: true
+          helpURL: https://adup-tech.atlassian.net/wiki/spaces/UA/pages/3509190661/Git+Commit+Message+Convention
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+            ${{ toJSON(steps.commitlint-github-action.outputs.result) }}
+          reactions: eyes
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
