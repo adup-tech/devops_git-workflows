@@ -24,15 +24,14 @@ jobs:
         with:
           message: |
             :robot: commit linter results for:
-            ${{ toJSON(steps.commitlint-github-action.outputs.results).message }}
+            ${{ toJSON(steps.commitlint-github-action.outputs.results)[0].message }}
 
-            :no_entry: erros:
-            > ${{ join(toJSON(steps.commitlint-github-action.outputs.results).errors, '<br>') }}
+            :no_entry:
+            > ${{ join(toJSON(steps.commitlint-github-action.outputs.results)[0].errors, '<br>') }}
 
-            :warning: warnings:
-            > ${{ join(toJSON(steps.commitlint-github-action.outputs.results).warnings, '<br>') }}
+            :warning:
+            > ${{ join(toJSON(steps.commitlint-github-action.outputs.results)[0].warnings, '<br>') }}
 
             Please fix it!
             see: [Commit message conventions](https://adup-tech.atlassian.net/wiki/spaces/UA/pages/3509190661/Git+Commit+Message+Convention)
-          reactions: eyes
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
