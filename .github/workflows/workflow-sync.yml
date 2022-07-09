@@ -30,3 +30,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
           # ${{secrets.GITHUB_TOKEN}} will not work. Instead Personal Access Token Required.
+          # https://github.com/marketplace/actions/github-workflow-sync#personal-access-token-scope
