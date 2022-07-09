@@ -27,4 +27,6 @@ jobs:
           REPOSITORIES: ${{ env.REPOSITORIES }}
           WORKFLOW_FILES_DIR: ${{ env.WORKFLOW_FILES_DIR }}
           WORKFLOW_FILES: ${{ env.WORKFLOW_FILES }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+          # ${{secrets.GITHUB_TOKEN}} will not work. Instead Personal Access Token Required.
