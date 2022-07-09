@@ -9,8 +9,11 @@ env:
   REPOSITORIES: |
     adup-tech/devops_salt-adup
 
+  WORKFLOW_FILES_DIR: workflows
+
   WORKFLOW_FILES: |
     pull-request.yml
+
 jobs:
   Github_Workflow_Sync:
     runs-on: ubuntu-latest
@@ -22,5 +25,6 @@ jobs:
         with:
           DRY_RUN: ${{ env.DRY_RUN }}
           REPOSITORIES: ${{ env.REPOSITORIES }}
+          WORKFLOW_FILES_DIR: ${{ env.WORKFLOW_FILES_DIR }}
           WORKFLOW_FILES: ${{ env.WORKFLOW_FILES }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
