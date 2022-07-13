@@ -1,6 +1,6 @@
 {
   "branches": [
-    "release",
+    "last",
     {
       "name": "main",
       "prerelease": true
