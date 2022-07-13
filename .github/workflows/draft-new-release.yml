@@ -30,12 +30,12 @@ jobs:
         uses: dev-drprasad/delete-tag-and-release@v0.2.0
         with:
           delete_release: false
-          tag_name: ${{ steps.semantic.outputs.new_release_version }}
+          tag_name: v${{ steps.semantic.outputs.new_release_version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create release branch
-        run: git checkout -b release/${{ steps.semantic.outputs.new_release_version }}
+        run: git checkout -b release/v${{ steps.semantic.outputs.new_release_version }}
 
       - name: Create pull request
         if: steps.semantic.outputs.new_release_published == 'true'
@@ -47,7 +47,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: release/${{ steps.semantic.outputs.new_release_version }}
+          branch: release/v${{ steps.semantic.outputs.new_release_version }}
           base: main
           delete-branch: true
           title: Release version ${{ steps.semantic.outputs.new_release_version }}
