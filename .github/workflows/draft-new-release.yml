@@ -35,7 +35,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create release branch
-        run: git checkout -b release/v${{ steps.semantic.outputs.new_release_version }}
+        run: git checkout -b release_v${{ steps.semantic.outputs.new_release_version }}
 
       - name: Create pull request
         if: steps.semantic.outputs.new_release_published == 'true'
@@ -47,7 +47,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: "release/v${{ steps.semantic.outputs.new_release_version }}"
+          branch: "release_v${{ steps.semantic.outputs.new_release_version }}"
           base: main
           delete-branch: true
           title: Release version ${{ steps.semantic.outputs.new_release_version }}
