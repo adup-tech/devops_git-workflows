@@ -47,7 +47,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
-          branch: release/v${{ steps.semantic.outputs.new_release_version }}
+          branch: "release/v${{ steps.semantic.outputs.new_release_version }}"
           base: main
           delete-branch: true
           title: Release version ${{ steps.semantic.outputs.new_release_version }}
