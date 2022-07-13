@@ -1,8 +1,10 @@
 {
   "branches": [
-    "main",
-    {"name": "next", "prerelease": true},
-    {"name": "release/+([0-9])?(.+([0-9]))?(.+([0-9]))?", "prerelease": true}
+    "release",
+    {
+      "name": "main",
+      "prerelease": true
+    }
   ],
   "plugins": [
     ["@semantic-release/commit-analyzer", {
