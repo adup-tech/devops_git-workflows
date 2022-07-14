@@ -6,5 +6,7 @@ on:
       - main
 
 jobs:
-  call-workflow:
-    uses: adup-tech/devops_git-workflows/.github/workflows/pull-request-check.yml@main
+  pr-labeler:
+    uses: adup-tech/devops_git-workflows/.github/workflows/_run_labeler.yml@main
+  commit-lint:
+    uses: adup-tech/devops_git-workflows/.github/workflows/_run_commit_lint.yml@main

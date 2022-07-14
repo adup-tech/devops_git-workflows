@@ -1,0 +1,14 @@
+python:
+  - *.py
+
+javascript:
+  - *.js
+  - *.ts
+  - *.tsx
+
+php:
+  - *.php
+
+css:
+  - *.css
+

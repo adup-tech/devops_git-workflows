@@ -1,6 +1,11 @@
-name: Pull Request Check Workflow
+name: Commit Lint Workflow
 on:
   workflow_call:
+    inputs:
+      fail_on_warnings:
+        required: false
+        type: boolean
+        default: true
 
 jobs:
   commitlint:
@@ -15,7 +20,7 @@ jobs:
         id: commitlint-github-action
         with:
           configFile: commitlint.config.js
-          failOnWarnings: true
+          failOnWarnings: ${{ inputs.fail_on_warnings }}
           helpURL: https://adup-tech.atlassian.net/wiki/spaces/UA/pages/3509190661/Git+Commit+Message+Convention
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
