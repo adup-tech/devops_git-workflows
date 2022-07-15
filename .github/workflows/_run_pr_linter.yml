@@ -1,0 +1,26 @@
+# DO NOT EDIT IN PROJECTS! Workflows starting with _ are managed by devops_git-workflows and should only be edited in that project.
+name: PR Lint
+
+on:
+  pull_request:
+    # By default, a workflow only runs when a pull_request's activity type is opened, synchronize, or reopened. We
+    # explicity override here so that PR titles are re-linted when the PR text content is edited.
+    #
+    # Possible values: https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
+    types: [opened, reopened, synchronize]
+
+jobs:
+  pr-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: morrisoncole/pr-lint-action@v1.6.1
+        with:
+          title-regex: "(feat|fix|build|chore|ci|docs|perf|refactor|revert|style|test){1}(\([a-zA-Z]+\))?:\s((?:UAS|AUS|SBT)-[0-9]+)?(?::\s)?(.{10,})"
+          on-failed-regex-fail-action: false
+          on-failed-regex-request-changes: false
+          on-failed-regex-create-review: true
+          on-failed-regex-comment:
+            "This is just an example. Failed regex: `%regex%`!"
+          on-succeeded-regex-dismiss-review-comment:
+            "This is just an example. Success!"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
