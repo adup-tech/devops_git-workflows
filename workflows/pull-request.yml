@@ -10,5 +10,5 @@ jobs:
     uses: adup-tech/devops_git-workflows/.github/workflows/_run_labeler.yml@main
   commit-lint:
     uses: adup-tech/devops_git-workflows/.github/workflows/_run_commit_lint.yml@main
-  pr-lint:
+  pr-title-lint:
     uses: adup-tech/devops_git-workflows/.github/workflows/_run_pr_linter.yml@main
