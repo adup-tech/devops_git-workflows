@@ -1,3 +1,4 @@
+# DO NOT EDIT IN PROJECTS! Workflows starting with _ are managed by devops_git-workflows and should only be edited in that project.
 name: Commit Lint Workflow
 on:
   workflow_call:

@@ -7,7 +7,7 @@ on:
 env:
   DRY_RUN: true
   REPOSITORIES: |
-    adup-tech/devops_salt-adup
+    adup-tech/project_for_testing_workflows 
 
   WORKFLOW_FILES_DIR: workflows
 
